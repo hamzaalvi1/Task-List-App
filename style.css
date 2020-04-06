@@ -17,15 +17,27 @@
     line-height: 1rem;
     letter-spacing: 0.2rem;
 }
-.collection li{
-    display:  flex;
-    flex-direction: row;
-    align-items: center;
-    font-weight: 600;
+.collection{
     letter-spacing: .1rem;
     font-size: 22px;
+    display: flex;
+    flex-direction: column;
 }
+.collection-item{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.collection-item > a{
+    position: absolute;
+    left: 40em;
+}
+.collection-item > label{
+    position: absolute;
+    left: .5px;
+    
+}
+
 .icon-class{
-    margin-left: 51rem;
     color: teal;
 }
