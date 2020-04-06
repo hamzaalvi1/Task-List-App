@@ -1,0 +1,31 @@
+
+.card-panel h2{
+    background-color: teal ;
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+.card-panel{
+    border-radius: 10px;
+}
+.card-panel button{
+    width: 100%;
+    margin-top: 10px;
+    background-color: teal;
+    font-weight: 600;
+    line-height: 1rem;
+    letter-spacing: 0.2rem;
+}
+.collection li{
+    display:  flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    font-size: 22px;
+}
+.icon-class{
+    margin-left: 51rem;
+    color: teal;
+}
