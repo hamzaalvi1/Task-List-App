@@ -1,6 +1,7 @@
 const form = document.querySelector("form")
 const liCollection = document.querySelector(".collection")
 const taskItems = []
+let counter = 0
 
 const getTaskfromUser = (evt) =>{
     let task =  evt.target.elements["add-task"].value
@@ -8,11 +9,12 @@ const getTaskfromUser = (evt) =>{
         task = task.toLowerCase()
         let taskObj = {
             task,
-            isCompleted : false
         }
         taskItems.push(taskObj)
         form.reset()
-        printTaskList()
+        printTask()
+        .then(data => deleteTask(data))
+        .catch(err => console.log(err))
 
     }
     else{
@@ -25,31 +27,81 @@ const getTaskfromUser = (evt) =>{
 
 }
 
-
-const printTaskList = ()=>{
-const label = document.createElement("label")
-const checkBox = document.createElement("input")
-checkBox.setAttribute("type","checkbox") 
-const span = document.createElement("span")
-label.append(checkBox,span)
-const a = document.createElement("a")
-a.setAttribute("href","#")
-const icon = document.createElement("i")
-icon.textContent = "delete"
-icon.classList.add("material-icons")
-a.classList.add("icon-class")
-a.append(icon)  
-const li = document.createElement("li")
-li.classList.add("collection-item","collection-li")    
-taskItems.forEach((task,index)=>{
-     li.textContent = task.task
-     li.appendChild(label)
-     li.setAttribute("data-id",index)
-     li.append(a)
-     liCollection.append(li)
-})
+const printTask = ()=>{
+    const anchor = document.createElement("a")
+    anchor.setAttribute("href","#")
+    anchor.classList.add("icon-class")
+    const icon = document.createElement("i")
+    icon.classList.add("material-icons")
+    icon.textContent = "delete"
+    anchor.append(icon)
+    const li = document.createElement("li")
+    li.classList.add("collection-item","collection-li")
     
+    const promise = new Promise((res,rej)=>{
+        setTimeout(()=>{
+            taskItems.forEach((task,index)=>{
+                if(index === counter){
+                li.textContent = task.task;
+                li.setAttribute("id",index)
+                li.append(anchor)
+                liCollection.append(li)
+
+            }
+            else{
+                console.log("task already declared!")
+            }
+         
+          })
+          counter++
+
+            const lists = document.querySelectorAll("li")
+        if(lists.length !== 0){
+            res(lists)
+        }
+        else{
+            rej("error occured list is not defined")
+        }
+        
+        },1000)
+        
+    })
+
+return promise
 }
+
+
+
+const deleteTask = (tList)=>{
+
+tList = Array.from(tList)
+
+tList.forEach((_singleLi,index) =>{
+    _singleLi.addEventListener("click",(e)=>{
+        e.stopPropagation()
+        e.stopImmediatePropagation()
+        if(e.target.tagName === "I"){   
+        const id = e.target.parentElement.parentElement.id 
+        e.target.parentElement.parentElement.remove()
+        taskItems.splice(id,1)
+        console.log(taskItems)
+        $(document).ready(function(){
+            $('#modal1').modal();
+            $('#modal1').modal('open'); 
+         });    
+    }
+        else{
+            console.log("not targeted!")
+        }
+    },false)
+})
+
+
+
+}
+
+
+
 
 
 
