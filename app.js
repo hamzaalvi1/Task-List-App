@@ -54,7 +54,7 @@ const printTask = ()=>{
          
           })
           counter++
-
+           
             const lists = document.querySelectorAll("li")
         if(lists.length !== 0){
             res(lists)
@@ -84,7 +84,7 @@ tList.forEach((_singleLi,index) =>{
         const id = e.target.parentElement.parentElement.id 
         e.target.parentElement.parentElement.remove()
         taskItems.splice(id,1)
-        console.log(taskItems)
+        counter--
         $(document).ready(function(){
             $('#modal1').modal();
             $('#modal1').modal('open'); 
